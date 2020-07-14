@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  ### Laravel Crond Container ###
+  laravel-crond:
+    build:
+      context: ./php-worker
+    container_name: laravel-crond-container
+    volumes:
+      - laravel_crond_log_volume:/var/log/cron
+      - /var/www:/var/www
+    networks:
+      - laravel_crond_network
+
+volumes:
+   laravel_crond_log_volume:
+
+networks:
+  laravel_crond_network:
+    driver: bridge
